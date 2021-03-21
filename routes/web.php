@@ -20,3 +20,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::group(['prefix' => 'dashboard' , 'middleware' => ['auth']], function () {
+    Route::get('/', 'Dashboard\DashboardController@index');
+
+});
+
+Route::get('dashboard/login' , 'Dashboard\LoginController@login_form');
+Route::post('dashboard/login', 'Dashboard\LoginController@login')->name('dashboard.login');
+
