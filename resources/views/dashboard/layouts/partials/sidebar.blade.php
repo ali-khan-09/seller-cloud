@@ -35,7 +35,7 @@
                             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                             <polyline points="9 22 9 12 15 12 15 22"></polyline>
                         </svg>
-                        <span>Portfolio</span>
+                        <span>Home</span>
                     </div>
                     <div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -48,14 +48,14 @@
                 <ul class="collapse submenu recent-submenu list-unstyled show" id="forms"
                     data-parent="#accordionExample">
                     <li>
-                        <a href=""> Show Portfolio </a>
+                        <a href=""> Products </a>
                     </li>
                     <li>
-                        <a href=""> Create Portfolio </a>
+                        <a href="">Products</a>
                     </li>
                 </ul>
             </li>
-            <li class="menu active">
+            <!--   <li class="menu active">
                 <a href="#forms" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -83,7 +83,8 @@
                         <a href=""> Create Services </a>
                     </li>
                 </ul>
-            </li>
+            </li>      -->
+
         </ul>
 
     </nav>

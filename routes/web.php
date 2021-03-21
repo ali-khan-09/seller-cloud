@@ -23,7 +23,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['prefix' => 'dashboard' , 'middleware' => ['auth']], function () {
     Route::get('/', 'Dashboard\DashboardController@index');
-
+    Route::get('product' , 'ProductController@index')->name('product.index');
+    Route::get('admin-registration' , 'Dashboard\RegistrationController@registration_form');
+    Route::post('admin-registration' , 'Dashboard\RegistrationController@register');
 });
 
 Route::get('dashboard/login' , 'Dashboard\LoginController@login_form');
