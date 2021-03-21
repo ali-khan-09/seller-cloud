@@ -12,6 +12,7 @@ class LoginController extends Controller
         return view('auth.admin-login');
     }
     public function login(Request $request){
+//        dd($request->all());
         $credentials = $request->only('email', 'password');
         $data = request()->validate([
             'email' => 'required|email',
