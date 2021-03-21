@@ -21,7 +21,7 @@ class CreateAdminsTable extends Migration
             $table->string('phone');
             $table->string('state');
             $table->string('city');
-            $table->string('zip');
+            $table->string('postal_code');
             $table->string('address');
             $table->boolean('status')->default(1);
             $table->timestamp('email_verified_at')->nullable();

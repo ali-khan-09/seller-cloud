@@ -21,7 +21,8 @@
                         </div>
                     </div>
                     <div class="widget-content widget-content-area">
-                        <form>
+                        <form action="{{route('admin.register')}}" method="post">
+                            @csrf
                             <div class="row mb-4">
                                 <div class="col-lg-6">
                                     <label>First Name</label>
@@ -53,20 +54,26 @@
                                 </div>
                                 <div class="col-2">
                                     <label>Zip</label>
-                                    <input type="text" name="zip" class="form-control" placeholder="Zip">
+                                    <input type="text" name="postal_code" class="form-control" placeholder="Zip">
                                 </div>
                             </div>
                             <div class="form-row mb-4">
+                                <div class="col-12">
+                                    <label>Address</label>
+                                    <input type="text" name="address" class="form-control" placeholder="address">
+                                </div>
+                            </div>
+                            <div class="form-row mb-4 mt-2">
                                 <div class="col-6">
                                     <label for="p-text" class="sr-only">Password</label>
                                     <input id="p-text" type="password" name="password" placeholder="Password" class="form-control" required>
                                 </div>
                                 <div class="col-6">
                                     <label for="p-text" class="sr-only">Confirm Password</label>
-                                    <input id="p-text" type="password" name="password" placeholder="Password" class="form-control" required>
+                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Password" class="form-control" required>
                                 </div>
                             </div>
-                            <input type="submit" name="time" class="btn btn-primary">
+                            <input type="submit" class="btn btn-primary">
                         </form>
                         <div class="code-section-container">
                             <button class="btn toggle-code-snippet"><span>Code</span></button>
