@@ -23,9 +23,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['prefix' => 'dashboard' , 'middleware' => ['auth']], function () {
     Route::get('/', 'Dashboard\DashboardController@index');
-    Route::get('product' , 'ProductController@index')->name('product.index');
+    Route::get('product' , 'ProductController@index')->name('dashboard.product.index');
+    // ADMIN ROUTES
     Route::get('admin-registration' , 'Dashboard\RegistrationController@registration_form')->name('admin-register.form');
-    Route::post('admin-registration' , 'Dashboard\RegistrationController@register')->name('admin.register');
+    Route::post('admin-registration' , 'Dashboard\AdminController@register')->name('admin.register');
+    Route::get('admins' , 'Dashboard\AdminController@index')->name('dashboard.admin.index');
 });
 
 Route::get('dashboard/login' , 'Dashboard\LoginController@login_form');
