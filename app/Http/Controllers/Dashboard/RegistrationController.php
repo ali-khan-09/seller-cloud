@@ -16,20 +16,22 @@ class RegistrationController extends Controller
     public function register(Request $request){
 //        dd(\request()->all());
         $data = $request->validate([
-            'first_name'  => 'required',
-            'last_name'   => 'required',
+            'first_name'  => ['required'],
+            'last_name'   => ['required'],
+            'username'    => ['required'],
             'email'       => ['required'],
-            'phone'       => 'required',
-            'city'        => 'required',
-            'state'       => 'required',
-            'address'     => 'required',
-            'postal_code' => 'required',
+            'phone'       => ['required'],
+            'city'        => ['required'],
+            'state'       => ['required'],
+            'address'     => ['required'],
+            'postal_code' => ['required'],
             'password'    => ['required','string','confirmed'],
         ]);
 //        return  \request()->all();
         $account = Admin::create([
             'first_name' => $data['first_name'],
             'last_name'  => $data['last_name'],
+            'username'  => $data['username'],
             'email'      => $data['email'],
             'phone'      => $data['phone'],
             'city'       => $data['city'],
