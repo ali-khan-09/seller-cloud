@@ -26,7 +26,7 @@
                             <div class="row mb-4">
                                 <div class="col-lg-6">
                                     <label>First Name</label>
-                                    <input type="text" name="first_name" class="form-control" placeholder="Enter your First name">
+                                    <input type="text" name="first_name" value="{{ old('first_name') }}" class="form-control" placeholder="Enter your First name">
                                     <div><p class="text-danger text-sm">
                                          @error('first_name')
                                             {{$message}}
@@ -36,7 +36,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <label>Last Name</label>
-                                    <input type="text" name="last_name" class="form-control" placeholder="Enter your Last name">
+                                    <input type="text" name="last_name" value="{{ old('last_name') }}" class="form-control" placeholder="Enter your Last name">
                                     <div><p class="text-danger text-sm">
                                             @error('last_name')
                                             {{$message}}
@@ -48,7 +48,7 @@
                             <div class="row mb-4">
                                 <div class="col-6">
                                     <label>Username</label>
-                                    <input type="text" name="username" class="form-control" placeholder="Enter Your Username">
+                                    <input type="text" name="username" value="{{ old('username') }}"3 class="form-control" placeholder="Enter Your Username">
                                     <div><p class="text-danger text-sm">
                                             @error('username')
                                             {{$message}}
@@ -59,7 +59,7 @@
 
                                 <div class="col-lg-6">
                                     <label>Phone Number</label>
-                                    <input id="tel-text" type="tel" name="phone" placeholder="6-(666)-111-7777" class="form-control" required>
+                                    <input id="tel-text" type="tel" value="{{ old('phone') }}" name="phone" placeholder="6-(666)-111-7777" class="form-control" required>
                                     <div><p class="text-danger text-sm">
                                             @error('phone')
                                             {{$message}}
@@ -71,7 +71,7 @@
                             <div class="form-row mb-4">
                                 <div class="col-lg-5">
                                     <label>E-mail</label>
-                                    <input type="email" name="email" class="form-control" placeholder="Enter you E-mail">
+                                    <input type="email" name="email" value="{{ old('email') }}" class="form-control" placeholder="Enter you E-mail">
                                     <div><p class="text-danger text-sm">
                                             @error('email')
                                             {{$message}}
@@ -81,7 +81,7 @@
                                 </div>
                                 <div class="col-7">
                                     <label>City</label>
-                                    <input type="text" name="city" class="form-control" placeholder="City">
+                                    <input type="text" name="city" value="{{ old('city') }}" class="form-control" placeholder="City">
                                     <div><p class="text-danger text-sm">
                                             @error('city')
                                             {{$message}}
@@ -93,7 +93,7 @@
                             <div class="form-row mb-4">
                                 <div class="col-7">
                                     <label>Address</label>
-                                    <input type="text" name="address" class="form-control" placeholder="address">
+                                    <input type="text" name="address" value="{{ old('address') }}" class="form-control" placeholder="address">
                                     <div><p class="text-danger text-sm">
                                             @error('address')
                                             {{$message}}
@@ -103,7 +103,7 @@
                                 </div>
                                 <div class="col-3">
                                     <label>State</label>
-                                    <input type="text" name="state" class="form-control" placeholder="State">
+                                    <input type="text" name="state" value="{{ old('state') }}" class="form-control" placeholder="State">
                                     <div><p class="text-danger text-sm">
                                             @error('state')
                                             {{$message}}
@@ -112,8 +112,8 @@
                                     </div>
                                 </div>
                                 <div class="col-2">
-                                    <label>Zip</label>
-                                    <input type="text" name="postal_code" class="form-control" placeholder="Zip">
+                                    <label>Postal Code</label>
+                                    <input type="text" name="postal_code" value="{{ old('postal_code') }}" class="form-control" placeholder="Zip">
                                     <div><p class="text-danger text-sm">
                                             @error('postal_code')
                                             {{$message}}
