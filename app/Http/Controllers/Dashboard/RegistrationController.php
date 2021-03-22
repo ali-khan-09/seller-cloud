@@ -31,7 +31,7 @@ class RegistrationController extends Controller
         $account = Admin::create([
             'first_name' => $data['first_name'],
             'last_name'  => $data['last_name'],
-            'username'  => $data['username'],
+            'username'   => $data['username'],
             'email'      => $data['email'],
             'phone'      => $data['phone'],
             'city'       => $data['city'],
