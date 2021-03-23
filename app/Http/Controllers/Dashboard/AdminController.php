@@ -50,6 +50,6 @@ class AdminController extends Controller
 //        return redirect(route('/'))->with('message' , 'Your have Add Admin Successfully');
     }
     public function edit($id){
-        return view('dashboard.edit');
+        return view('dashboard.admin.edit');
     }
 }
