@@ -42,7 +42,10 @@
                                         <td>{{$item->state}}</td>
                                         <td>{{$item->city}}</td>
                                         <td>{{$item->status}}</td>
-                                        <td class="text-center"><button class="btn btn-primary">View</button> </td>
+                                        <td class="text-center">
+                                            <button class="btn btn-primary">View</button>
+{{--                                            <a target="#edit_modal" href="{{route('dashboard.admin.edit',$item->id)}}" class="btn btn-primary">Edit</a>--}}
+                                        </td>
                                     </tr>
                                     @endforeach
 
@@ -76,5 +79,6 @@
                 </div>
             </div>
         </div>
+        @yield('content')
         <!--  END Table AREA  -->
 @endsection

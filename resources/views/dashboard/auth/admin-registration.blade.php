@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.app')
 @section('title')
-    Client Project
+    Admin Registration
 @endsection
 @section('content')
     <!--  BEGIN CONTENT AREA  -->
@@ -10,13 +10,13 @@
                 <p>{{ \Session::get('message') }}</p>
             </div>
         @endif
-        <div class="container mt-4">
+        <div class="mt-4">
             <div class="col-lg-10 m-auto col-12 layout-spacing">
                 <div class="statbox widget box box-shadow">
                     <div class="widget-header">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4 class="p-2">Admin Registration</h4>
+                                <h4 class="p-2 text-primary">Admin Registration</h4>
                             </div>
                         </div>
                     </div>

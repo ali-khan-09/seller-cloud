@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
     <title>@yield('title') | {{config('app.name')}} </title>
     @include('dashboard.layouts.partials.style')
-
+    @livewireStyles
 </head>
 <body class="sidebar-noneoverflow" data-spy="scroll" data-target="#navSection" data-offset="100">
 <div class="main-container" id="container">
@@ -17,10 +17,7 @@
 
 @yield('content')
 </div>
-
 @include('dashboard.layouts.partials.scripts')
-
-
-
+@livewireScripts
 </body>
 </html>

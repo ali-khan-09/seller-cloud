@@ -49,7 +49,5 @@ class AdminController extends Controller
         return 'User register';
 //        return redirect(route('/'))->with('message' , 'Your have Add Admin Successfully');
     }
-    public function edit($id){
-        return view('dashboard.edit');
-    }
+
 }
