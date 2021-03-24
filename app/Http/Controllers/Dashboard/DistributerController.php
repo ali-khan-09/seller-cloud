@@ -47,4 +47,9 @@ class DistributerController extends Controller
         ]);
        return 'Distributer registered';
     }
+    public function edit(Request $request)
+	{
+		$id = $request->distributer;
+		return Distributer::find($id);
+	}
 }

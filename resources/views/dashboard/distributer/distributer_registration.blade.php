@@ -17,7 +17,7 @@
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                 <h4 class="p-2">Distributer Registration</h4>
-                                <a href="" class="btn btn-primary float-right">Distributer List</a>
+                                <a href="/dashboard/distributers" class="btn btn-primary float-right">Distributer List</a>
                             </div>
                         </div>
                     </div>

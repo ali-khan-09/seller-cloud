@@ -30,7 +30,8 @@ Route::group(['prefix' => 'dashboard' , 'middleware' => ['auth']], function () {
     Route::get('admins' , 'Dashboard\AdminController@index')->name('dashboard.admin.index');
     Route::get('distributers' , 'Dashboard\DistributerController@index')->name('dashboard.distributer.index');
     Route::get('distributer-registration' , 'Dashboard\DistributerController@distributer_form')->name('admin-register.form');
-    Route::post('distributer-registration' , 'Dashboard\DistributerController@register')->name('distributer.register');
+    Route::post('distributer-registration' , 'Dashboard\DistributerController@register')->name('distributer.register');  
+    Route::get('distributer-edit' , 'Dashboard\DistributerController@edit')->name('distributer.edit'); 
 });
 
 Route::get('dashboard/login' , 'Dashboard\LoginController@login_form');
