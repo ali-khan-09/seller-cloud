@@ -50,8 +50,10 @@ class AdminController extends Controller
 
         // Sending Mail to Account Created
         $mail = Mail::to($account->email)->send(new AdminNotificationMail($account , $password));
-        return redirect(route('dashborad.admin.index'));
+        return redirect(route('dashboard.admin.index'));
 //        return redirect(route('/'))->with('message' , 'Your have Add Admin Successfully');
     }
-
+    public function edit(Request $request){
+        return $request->id;
+    }
 }
