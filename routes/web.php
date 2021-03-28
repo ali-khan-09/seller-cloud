@@ -21,7 +21,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::group(['prefix' => 'dashboard' , 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'dashboard' ,  ], function () {
     Route::get('/', 'Dashboard\DashboardController@index');
     Route::get('product' , 'ProductController@index')->name('dashboard.product.index');
     // ADMIN ROUTES
@@ -32,6 +32,8 @@ Route::group(['prefix' => 'dashboard' , 'middleware' => ['auth']], function () {
     Route::get('distributer-registration' , 'Dashboard\DistributerController@distributer_form')->name('admin-register.form');
     Route::post('distributer-registration' , 'Dashboard\DistributerController@register')->name('distributer.register');  
     Route::get('distributer-edit' , 'Dashboard\DistributerController@edit')->name('distributer.edit'); 
+    Route::post('distributer-update' , 'Dashboard\DistributerController@editProcess')->name('distributer.update');
+    Route::post('distributer-delete' , 'Dashboard\DistributerController@delete')->name('distributer.delete');  
 });
 
 Route::get('dashboard/login' , 'Dashboard\LoginController@login_form');

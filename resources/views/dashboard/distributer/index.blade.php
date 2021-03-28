@@ -34,7 +34,7 @@
                                     </thead>
                                     <tbody>
                                     @foreach($distributer as $item)
-                                    <tr>
+                                    <tr id="row{{$item->id}}">
                                         <td>{{$item->name}}</td>
                                         <td>{{$item->username}}</td>
                                         <td>{{$item->email}}</td>
@@ -42,8 +42,12 @@
                                         <td>{{$item->state}}</td>
                                         <td>{{$item->city}}</td>
                                         <td>{{$item->status}}</td>
-                                        <td class="text-center"> <button type="button" class="btn btn-primary mb-2 mr-2" data-toggle="modal" data-target="#edit_modal" 
-                                            onclick="editDistricbuter({{$item->id}})">Edit</button></td>
+                                        <td class="text-center"> 
+                                            <button type="button" class="btn btn-primary mb-2 mr-2" data-toggle="modal" data-target="#edit_modal" 
+                                            onclick="editDistricbuter({{$item->id}})">Edit</button>
+                                            <button type="button" class="btn btn-danger mb-2 mr-2"  
+                                            onclick="deleteDistributer({{$item->id}})">Del</button>
+                                        </td>
                                     </tr>
                                     @endforeach
 
@@ -78,14 +82,15 @@
                                             <div class="widget-header">
                                                 <div class="row">
                                                     <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                        <h4 class="p-2">Distributer Registration</h4>
-                                                        <a href="/dashboard/distributers" class="btn btn-primary float-right">Distributer List</a>
+                                                        <h4 class="p-2">Distributer Edit</h4>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="widget-content widget-content-area">
-                                                <form action="{{route('distributer.register')}}" method="post">
+                                                <div class="alert text-danger" id="error"></div>
+                                                <form  method="post" id="distributer_form" >
                                                     @csrf
+                                                    <input type="hidden" name="d_id" id="d_id">
                                                     <div class="row mb-4">
                                                         <div class="col-lg-6">
                                                             <label>Name</label>
@@ -99,7 +104,7 @@
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label>Username</label>
-                                                            <input type="text" name="username" value="{{ old('username') }}" class="form-control" placeholder="Enter your Last name" id="username">
+                                                            <input type="text" name="username" value="{{ old('username') }}" class="form-control" placeholder="Enter ditributer username" id="username">
                                                             <div><p class="text-danger text-sm">
                                                                     @error('username')
                                                                     {{$message}}
@@ -111,7 +116,7 @@
                                                     <div class="row mb-4">
                                                         <div class="col-lg-6">
                                                             <label>E-mail</label>
-                                                            <input type="email" name="email" value="{{ old('email') }}" class="form-control" placeholder="Enter you E-mail">
+                                                            <input type="email" name="email" value="{{ old('email') }}" class="form-control" placeholder="Enter you E-mail" id="email">
                                                             <div><p class="text-danger text-sm">
                                                                     @error('email')
                                                                     {{$message}}
@@ -122,7 +127,7 @@
 
                                                         <div class="col-lg-6">
                                                             <label>Phone Number</label>
-                                                            <input id="tel-text" type="tel" value="{{ old('phone') }}" name="phone" placeholder="6-(666)-111-7777" class="form-control" id="email" >
+                                                            <input id="tel-text" type="tel" value="{{ old('phone') }}" name="phone" placeholder="6-(666)-111-7777" class="form-control"\ >
                                                             <div><p class="text-danger text-sm">
                                                                     @error('phone')
                                                                     {{$message}}
@@ -134,7 +139,7 @@
                                                     <div class="form-row mb-4">
                                                           <div class="col-12">
                                                             <label>Address</label>
-                                                            <input type="text" name="address" value="{{ old('address') }}" class="form-control" placeholder="address">
+                                                            <input type="text" name="address" value="{{ old('address') }}" class="form-control" placeholder="address" id="address">
                                                             <div><p class="text-danger text-sm">
                                                                     @error('address')
                                                                     {{$message}}
@@ -147,7 +152,7 @@
                                                     <div class="form-row mb-4">
                                                       <div class="col-7">
                                                             <label>City</label>
-                                                            <input type="text" name="city" value="{{ old('city') }}" class="form-control" placeholder="City">
+                                                            <input type="text" name="city" value="{{ old('city') }}" class="form-control" placeholder="City" id="city">
                                                             <div><p class="text-danger text-sm">
                                                                     @error('city')
                                                                     {{$message}}
@@ -157,7 +162,7 @@
                                                         </div>
                                                         <div class="col-3">
                                                             <label>State</label>
-                                                            <input type="text" name="state" value="{{ old('state') }}" class="form-control" placeholder="State">
+                                                            <input type="text" name="state" value="{{ old('state') }}" class="form-control" placeholder="State" id="state">
                                                             <div><p class="text-danger text-sm">
                                                                     @error('state')
                                                                     {{$message}}
@@ -167,7 +172,7 @@
                                                         </div>
                                                         <div class="col-2">
                                                             <label>Postal Code</label>
-                                                            <input type="text" name="postal_code" value="{{ old('postal_code') }}" class="form-control" placeholder="Zip">
+                                                            <input type="text" name="postal_code" value="{{ old('postal_code') }}" class="form-control" placeholder="Zip" id="postal_code">
                                                             <div><p class="text-danger text-sm">
                                                                     @error('postal_code')
                                                                     {{$message}}
@@ -176,10 +181,10 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-row mb-4 mt-2">
+                                                   <!--  <div class="form-row mb-4 mt-2">
                                                         <div class="col-6">
                                                             <label>Password</label>
-                                                            <input id="p-text" type="password" name="password" placeholder="Password" class="form-control" required>
+                                                            <input id="p-text" type="password" name="password" placeholder="Password" class="form-control" required >
                                                             <div><p class="text-danger text-sm">
                                                                     @error('password')
                                                                     {{$message}}
@@ -197,21 +202,18 @@
                                                                 </p>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                                                     <input type="submit" class="btn btn-primary">
                                                 </form>
-                                                <div class="code-section-container">
-                                                    <button class="btn toggle-code-snippet"><span>Code</span></button>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 <!--  END CONTENT AREA  -->
                             </div>
-                            <div class="modal-footer">
+                          <!--   <div class="modal-footer">
                                 <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Discard</button>
                                 <button type="button" class="btn btn-primary">Save</button>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -225,23 +227,5 @@
             </div>
         </div>
         <!--  END Table AREA  -->
-        <script>
-             function editDistricbuter(id)
-            {
-                $.ajax({
-                    url:'distributer-edit',
-                    type:'get',
-                    data: {distributer:id,_token: '{{csrf_token()}}' },
-                    success:function(data){
-                        console.log(data);
-                        $("#name").val(data.name);
-                        $("#username").val(data.username);
-                        $("#email").val(data.email);
-                    },
-                    error:function(response){
-                        alert('Error Occured');
-                    }
-                })
-            }
-        </script>
+     
 @endsection
