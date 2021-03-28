@@ -79,6 +79,6 @@
                 </div>
             </div>
         </div>
-        @yield('content')
+
         <!--  END Table AREA  -->
 @endsection

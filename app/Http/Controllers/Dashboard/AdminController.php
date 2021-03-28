@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Mail\AdminNotificationMail;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
 {
@@ -30,6 +32,8 @@ class AdminController extends Controller
             'postal_code' => ['required'],
             'password'    => ['required','string','confirmed'],
         ]);
+
+         $password = $request->password;
 //        return  \request()->all();
         $account = Admin::create([
             'first_name' => $data['first_name'],
@@ -45,8 +49,8 @@ class AdminController extends Controller
         ]);
 
         // Sending Mail to Account Created
-
-        return 'User register';
+        $mail = Mail::to($account->email)->send(new AdminNotificationMail($account , $password));
+        return redirect(route('dashborad.admin.index'));
 //        return redirect(route('/'))->with('message' , 'Your have Add Admin Successfully');
     }
 
