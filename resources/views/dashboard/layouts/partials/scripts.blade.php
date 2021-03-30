@@ -80,8 +80,7 @@
         "pageLength": 7,
         drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); }
     } );
-  function editDistricbuter(id)
-    {
+  function editDistricbuter(id) {
         $.ajax({
             url:'distributer-edit',
             type:'get',
@@ -120,7 +119,7 @@
                 tr += '<td>'+data.success.state+'</td>';
                 tr += '<td>'+data.success.city+'</td>';
                 tr += '<td>'+data.success.status+'</td>';
-                tr += '<td><button type="button" class="btn btn-primary mb-2 mr-2" data-toggle="modal" data-target="#edit_modal" onclick="editDistricbuter('+data.success.id+')">Edit</button></td>';
+                tr += '<td><button type="button" class="btn btn-primary mb-2 mr-2" data-toggle="modal" data-target="#edit_modal" onclick="editDistricbuter('+data.success.id+')">Edit</button> <button type="button" class="btn btn-danger mb-2 mr-2"  onclick="deleteDistributer('+data.success.id+')">Del</button> </td>';
                 $('#row'+data.success.id).html(tr);
                 $('#edit_modal').modal('toggle');
 
@@ -136,7 +135,7 @@
                 $('#error').html(errorString);
             }
         });
-  }); 
+  });
     function deleteDistributer(id) {
      var conf =  confirm("Do you really want to delete this distributer?");
      if(conf == true)
@@ -156,5 +155,84 @@
         });
       }
     }
+  // ADMIN AJAX FUNCTIONALITY
+    function adminEdit(id) {
+        $.ajax({
+            url:'admin/edit',
+            type:'get',
+            data: {id:id,_token: '{{csrf_token()}}' },
+            success:function(data){
+                console.log(data);
+                $("#first_name").val(data.first_name);
+                $("#last_name").val(data.last_name);
+                $("#username").val(data.username);
+                $("#email").val(data.email);
+                $("#city").val(data.city);
+                $("#phone").val(data.phone);
+                $("#address").val(data.address);
+                $("#username").val(data.username);
+                $("#state").val(data.state);
+                $("#admin_id").val(data.id);
+                $("#postal_code").val(data.postal_code);
+            },
+            error:function(response){
+                alert('Error Occured');
+            }
+        })
+    }
+    $("#admin_form").click(function(e){
+        e.preventDefault()
+        var tr = '';
+        $.ajax({
+            url:'admin-update',
+            type:'post',
+            data: $(this).serialize(),
+            success:function(data){
+                console.log(data)
+                tr += '<td>'+data.success.first_name+'</td>';
+                tr += '<td>'+data.success.last_name+'</td>';
+                tr += '<td>'+data.success.username+'</td>';
+                tr += '<td>'+data.success.email+'</td>';
+                tr += '<td>'+data.success.phone+'</td>';
+                tr += '<td>'+data.success.state+'</td>';
+                tr += '<td>'+data.success.city+'</td>';
+                tr += '<td>'+data.success.status+'</td>';
+                tr += '<td><button type="button" class="btn btn-primary mb-2 mr-2" data-toggle="modal" data-target="#edit_modal" onclick="editDistricbuter('+data.success.id+')">Edit</button> <button type="button" class="btn btn-danger mb-2 mr-2"  onclick="deleteDistributer('+data.success.id+')">Del</button> </td>';
+                $('#row'+data.success.id).html(tr);
+                // $('#edit_modal').modal('toggle');
+
+            },
+            error:function(response){
+                var error = response.responseJSON.errors;
+                var response2 = JSON.parse(response.responseText);
+                var errorString = '<ul>';
+                $.each( response2.errors, function( key, value) {
+                    errorString += '<li>' + value + '</li>';
+                });
+                errorString += '</ul>'
+                $('#error').html(errorString);
+            }
+        });
+    })
+    function delete_admin(id) {
+        var conf =  confirm("Do you really want to delete this distributer?");
+        if(conf == true)
+        {
+            $.ajax({
+                url:'admin-delete',
+                type:'post',
+                data: {id:id,_token: '{{csrf_token()}}' },
+                success:function(data){
+                    console.log(data);
+                    alert(data.success);
+                    $("#row"+id).fadeOut();
+                },
+                error:function(response){
+                    alert('Error Occured');
+                }
+            });
+        }
+    }
 </script>
+
 <!-- Table js end-->

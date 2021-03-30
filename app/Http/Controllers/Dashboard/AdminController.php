@@ -54,6 +54,61 @@ class AdminController extends Controller
 //        return redirect(route('/'))->with('message' , 'Your have Add Admin Successfully');
     }
     public function edit(Request $request){
-        return $request->id;
+        $id =  $request->id;
+        $admin =  Admin::find($id);
+        return $admin;
+    }
+    public function update(Request $request){
+        $admin = Admin::find($request->id);
+//        return response()->json(['data' => $request->id]);
+        $data = $request->validate([
+            'first_name'  => ['required'],
+            'last_name'   => ['required'],
+            'username'    => ['required'],
+            'email'       => ['required'],
+            'phone'       => ['required'],
+            'city'        => ['required'],
+            'state'       => ['required'],
+            'address'     => ['required'],
+            'postal_code' => ['required'],
+        ]);
+        if ($request->password){
+            $data = \request()->validate(['password' => ['required','string','confirmed']]);
+            $password = $data['password'];
+//            return response()->json(['data' => $password]);
+
+            $admin->update([
+                'first_name'      => $request['first_name'],
+                'last_name'       => $request['last_name'],
+                'username'        => $request['username'],
+                'email'           => $request['email'],
+                'phone'           => $request['phone'],
+                'city'            => $request['city'],
+                'state'           => $request['state'],
+                'postal_code'     => $request['postal_code'],
+                'address'         => $request['address'],
+                'password'        => Hash::make($request->password),
+            ]);
+        }
+        else{
+            $admin->update([
+                'first_name'      => $request['first_name'],
+                'last_name'       => $request['last_name'],
+                'username'        => $request['username'],
+                'email'           => $request['email'],
+                'phone'           => $request['phone'],
+                'city'            => $request['city'],
+                'state'           => $request['state'],
+                'postal_code'     => $request['postal_code'],
+                'address'         => $request['address'],
+            ]);
+        }
+        return response()->json(['success' => $admin]);
+    }
+    public function destroy(Request $request){
+        $id = $request->id;
+        $admin = Admin::find($id);
+        $admin->delete();
+        return response()->json(['success' => 'Record has been successfully Deleted']);
     }
 }
