@@ -42,10 +42,10 @@
                                         <td>{{$item->state}}</td>
                                         <td>{{$item->city}}</td>
                                         <td>{{$item->status}}</td>
-                                        <td class="text-center"> 
-                                            <button type="button" class="btn btn-primary mb-2 mr-2" data-toggle="modal" data-target="#edit_modal" 
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-primary mb-2 mr-2" data-toggle="modal" data-target="#edit_modal"
                                             onclick="editDistricbuter({{$item->id}})">Edit</button>
-                                            <button type="button" class="btn btn-danger mb-2 mr-2"  
+                                            <button type="button" class="btn btn-danger mb-2 mr-2"
                                             onclick="deleteDistributer({{$item->id}})">Del</button>
                                         </td>
                                     </tr>
@@ -61,7 +61,7 @@
                                         <th>state</th>
                                         <th>city</th>
                                         <th>Status</th>
-                                        <th class="invisible"></th>
+                                        <th>Action</th>
                                     </tr>
                                     </tfoot>
                                 </table>
@@ -147,7 +147,7 @@
                                                                 </p>
                                                             </div>
                                                         </div>
-                                                        
+
                                                     </div>
                                                     <div class="form-row mb-4">
                                                       <div class="col-7">
@@ -218,6 +218,7 @@
                     </div>
                 </div>
             <div class="footer-wrapper">
+                <!-- END Modal -->
                 <div class="footer-section f-section-1">
                     <p class="">Copyright © 2020 <a target="_blank" href="https://designreset.com/">DesignReset</a>, All rights reserved.</p>
                 </div>
@@ -227,5 +228,5 @@
             </div>
         </div>
         <!--  END Table AREA  -->
-     
+
 @endsection

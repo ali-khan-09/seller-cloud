@@ -60,7 +60,7 @@ class DistributerController extends Controller
     public function editProcess(Request $request)
     {
       
-        $data =  Validator::make($request->all(), [ 
+         $data = $request -> validate([
               'name'      => ['required'],
               'username'  => ['required'],
               'email'     => ['required'],
@@ -69,12 +69,8 @@ class DistributerController extends Controller
               'city'      => ['required'],
               'state'     => ['required'],
               'postal_code' => ['required']
-       ]);
-       if($data->fails())
-       {
-          return reponse()->json(['errors'=>$data->errors()->all()]);
-       }else
-       {
+          ]);
+       
           $id = $request->d_id;
           $distributer = Distributer::find($id);
           $distributer->update([
@@ -87,8 +83,7 @@ class DistributerController extends Controller
             'postal_code'=> $request['postal_code'],
             'address'    => $request['address'],
           ]);
-          return response()->json(['success' => $distributer]);
-       }
+        return response()->json(['success' => $distributer]);
     }
 
     public function delete(Request $request)
@@ -99,3 +94,4 @@ class DistributerController extends Controller
         return response()->json(['success'=>'Distributer deleted successfully!']);
     }
 }
+ 
