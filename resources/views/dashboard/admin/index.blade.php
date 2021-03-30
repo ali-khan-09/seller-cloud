@@ -24,6 +24,7 @@
                                     <tr>
                                         <th>First Name</th>
                                         <th>Last Name</th>
+                                        <th>Username</th>
                                         <th>E-mail</th>
                                         <th>Phone</th>
                                         <th>state</th>
@@ -37,15 +38,16 @@
                                     <tr id="row{{$item->id}}">
                                         <td>{{$item->first_name}}</td>
                                         <td>{{$item->last_name}}</td>
+                                        <td>{{$item->username}}</td>
                                         <td>{{$item->email}}</td>
                                         <td>{{$item->phone}}</td>
                                         <td>{{$item->state}}</td>
                                         <td>{{$item->city}}</td>
                                         <td>{{$item->status}}</td>
-                                        <td class="text-center">
-                                            <button type="button" class="btn btn-primary mb-2 mr-2" data-toggle="modal" data-target="#edit_modal"
+                                        <td class="text-center d-flex">
+                                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit_modal"
                                                     onclick="adminEdit({{$item->id}})">Edit</button>
-                                            <button type="button" class="btn btn-danger mb-2 mr-2"
+                                            <button type="button" class="btn btn-danger btn-sm"
                                                     onclick="delete_admin({{$item->id}})">Del</button>
                                         </td>
                                     </tr>
@@ -56,6 +58,7 @@
                                     <tr>
                                         <th>First Name</th>
                                         <th>Last Name</th>
+                                        <th>Username</th>
                                         <th>E-mail</th>
                                         <th>Phone</th>
                                         <th>state</th>
@@ -203,7 +206,7 @@
                                                 <div class="col-6">
                                                     <label>Password</label>
                                                     <input id="p-text" type="password" name="password" id="password"
-                                                           placeholder="Password" class="form-control" required>
+                                                           placeholder="Password" class="form-control" >
                                                     <div><p class="text-danger text-sm">
                                                             @error('password')
                                                             {{$message}}
@@ -214,7 +217,7 @@
                                                 <div class="col-6">
                                                     <label>Confirm Password</label>
                                                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation"
-                                                           placeholder="Password" class="form-control" required>
+                                                           placeholder="Password" class="form-control" >
                                                     <div><p class="text-danger text-sm">
                                                             @error('password_confirmation')
                                                             {{$message}}

@@ -103,7 +103,7 @@
             }
         });
     }
-  $('#distributer_form').click(function(e){
+  $('#distributer_form').submit(function(e){
      e.preventDefault();
      var tr = '';
      $.ajax({
@@ -180,7 +180,7 @@
             }
         })
     }
-    $("#admin_form").click(function(e){
+    $("#admin_form").submit(function(e){
         e.preventDefault()
         var tr = '';
         $.ajax({
@@ -197,9 +197,12 @@
                 tr += '<td>'+data.success.state+'</td>';
                 tr += '<td>'+data.success.city+'</td>';
                 tr += '<td>'+data.success.status+'</td>';
-                tr += '<td><button type="button" class="btn btn-primary mb-2 mr-2" data-toggle="modal" data-target="#edit_modal" onclick="editDistricbuter('+data.success.id+')">Edit</button> <button type="button" class="btn btn-danger mb-2 mr-2"  onclick="deleteDistributer('+data.success.id+')">Del</button> </td>';
+                tr += '<td class="d-flex text-center">' +
+                    '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit_modal" ' +
+                    'onclick="editDistricbuter('+data.success.id+')">Edit</button> ' +
+                    '<button type="button" class="btn btn-danger btn-sm"  onclick="deleteDistributer('+data.success.id+')">Del</button> </td>';
                 $('#row'+data.success.id).html(tr);
-                // $('#edit_modal').modal('toggle');
+                $('#edit_modal').modal('toggle');
 
             },
             error:function(response){
