@@ -19,7 +19,8 @@ class AdminController extends Controller
         return view('dashboard.auth.admin-registration');
     }
     public function register(Request $request){
-//        dd(\request()->all());
+        //        dd(\request()->all());
+        $this->authorize('create' , Admin::class);
         $data = $request->validate([
             'first_name'  => ['required'],
             'last_name'   => ['required'],

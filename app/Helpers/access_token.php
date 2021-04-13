@@ -1,8 +1,9 @@
 <?php
+use Carbon\Carbon;
 function generate_access_token(){
     session()->forget('access_token');
     if (!session()->has('access_token')){
-        session_start();
+//        session_start();
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => 'https://ch.api.sellercloud.com/rest/api/token',
@@ -32,5 +33,21 @@ function generate_access_token(){
         $access_token =  session()->put('access_token' , $response->access_token);
         $expires_in   =  session()->put('expires_in' , $response->expires_in);
         $issue_time   =  session()->put('issue', Now());
+    }
+}
+function token_expire(){
+    echo  $access_token = session()->get('access_token');
+    echo  $expire_in = session()->get('expires_in');
+    echo  $issue_in = session()->get('issue');
+    echo  $current_time = now();
+    echo  $extendedTime = Carbon::parse($issue_in)->addSecond($expire_in);
+    if (!session()->has('access_token')){
+        generate_access_token();
+    }
+    elseif($extendedTime < Carbon::now()){
+        generate_access_token();
+    }
+    else{
+        return $access_token;
     }
 }
