@@ -45,7 +45,7 @@ class ProductController extends Controller
 //                $ProductType=$catalog['Items'][$j]['ProductType'];
 //                $types = array("BathFaucet", "TUB", "Mirrors", "TUBFAUCETS","KitchenFaucet");
 //                $ID=$catalog['Items'][$j]['ID'];
-
+//                $catalogs['Items']['Index']
             foreach ($catalogs['Items'] as $items){
 //                return $items['ID'];
                   $types = array("BathFaucet", "TUB", "Mirrors", "TUBFAUCETS","KitchenFaucet");
@@ -130,7 +130,9 @@ class ProductController extends Controller
     public function  store(){
         token_expire();
         generate_access_token();
+
         function getCatalogs($number = 3){
+//            for ($number = 1; $number < 572; $number++){
             $curl = curl_init();
             curl_setopt_array($curl, array(
                 CURLOPT_URL => 'https://ch.api.sellercloud.com/rest/api/Catalog?model.companyID=198&model.companyID=187&model.companyID=183&model.pageNumber='.$number.'&model.pageSize=50',
@@ -151,43 +153,32 @@ class ProductController extends Controller
 
             curl_close($curl);
             $catalogs=json_decode($response,true);
-//         return $catalogs;
-            foreach ($catalogs as $items){
-                foreach ($items as $item){
-//                    $types = array("BathFaucet", "TUB", "Mirrors", "TUBFAUCETS","KitchenFaucet");
-//                    $product_type = $item['ProductType'];
-//                    if (in_array($product_type , $types)){
-//                        if (!Category::where('name', $item['ProductType'])->first()){
-//                            $categories = Category::create([
-//                           'name' => $item['ProductType']
-//                        ]);
-//                        }
-//
-//                    }
-
-                    return $items;
-
-
+//         return $catalogs['28563'];
+            foreach ($catalogs['Items'] as $items){
+                    $types = array("BathFaucet", "TUB", "Mirrors", "TUBFAUCETS","KitchenFaucet");
+                    $product_type = $items['ProductType'];
+                    if (in_array($product_type , $types)){
+                        $categories_check = Category::where('name', $items['ProductType'])->first();
+                        if ($categories_check == null){
+                            $new_category = Category::create([
+                           'name' => $items['ProductType']
+                        ]);
+                        }
+                        $product_check = Product::where('product_id' , $items['ID'])->first();
+                        if ($product_check == null){
+                            $new_product = Product::create([
+                               'product_id' => $items['ID'],
+                               'product_name' => $items['ProductName'],
+                               'category_id'  => $new_category->id,
+                                ]);
+                        }
                 }
-//                $types = array("BathFaucet", "TUB", "Mirrors", "TUBFAUCETS","KitchenFaucet");
-//                $product_type = $items['Items']['ProductType'];
-//                if (in_array($product_type , $types)) {
-////                            return $items['ProductType'];
-//                    if (!Category::where('name', $items['Items']['ProductType'])->first()) {
-//                        $categories = Category::create([
-//                           'name' => $items['Items']['ProductType']
-//                        ]);
-//
-//                        $product = Product::create([
-//                            'product_id' => $items['Items']['ID'],
-//                            'product_name' => $items['Items']['ProductName'],
-//                            'category_id'  => $categories->id,
-//                        ]);
-//                    }
-//                }
             }
 
+//            }
+
         }
-    print_r(getCatalogs());
+    echo "<pre>";print_r(getCatalogs());
+    echo "</pre>";
     }
 }
