@@ -15,7 +15,7 @@ class RegistrationController extends Controller
     }
     public function register(Request $request){
         //        dd(\request()->all());
-        $this->authorize('create' , Admin::class);
+//        $this->authorize('create' , Admin::class);
         $data = $request->validate([
             'first_name'  => ['required'],
             'last_name'   => ['required'],

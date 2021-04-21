@@ -25,14 +25,14 @@ class DistributerController extends Controller
     {
        $data = $request -> validate([
               'name'     	=> ['required'],
-              'username' 	=> ['required'],
-              'email'    	=> ['required'],
+              'username' 	=> ['required' , 'unique:distributers'],
+              'email'    	=> ['required' , 'unique:distributers'],
               'phone'    	=> ['required'],
               'address'  	=> ['required'],
               'city'     	=> ['required'],
               'state'    	=> ['required'],
               'postal_code' => ['required'],
-              'password'    => ['required','string','confirmed'] 
+              'password'    => ['required','string','confirmed']
        ]);
 
        $account = Distributer::create([
@@ -46,7 +46,7 @@ class DistributerController extends Controller
             'address'    => $data['address'],
             'password'   => Hash::make($data['password']),
         ]);
-       return 'Distributer registered';
+       return redirect(route('dashboard.distributer.index'));
     }
 
     public function edit(Request $request)
@@ -59,8 +59,8 @@ class DistributerController extends Controller
 
     public function editProcess(Request $request)
     {
-      
-        $data =  Validator::make($request->all(), [ 
+
+        $data =  Validator::make($request->all(), [
               'name'      => ['required'],
               'username'  => ['required'],
               'email'     => ['required'],

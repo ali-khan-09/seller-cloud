@@ -20,12 +20,12 @@ class AdminController extends Controller
     }
     public function register(Request $request){
         //        dd(\request()->all());
-        $this->authorize('create' , Admin::class);
+//        $this->authorize('create' , Admin::class);
         $data = $request->validate([
             'first_name'  => ['required'],
             'last_name'   => ['required'],
-            'username'    => ['required'],
-            'email'       => ['required'],
+            'username'    => ['required', 'unique:admins'],
+            'email'       => ['required', 'unique:admins'],
             'phone'       => ['required'],
             'city'        => ['required'],
             'state'       => ['required'],
@@ -50,7 +50,7 @@ class AdminController extends Controller
         ]);
 
         // Sending Mail to Account Created
-        $mail = Mail::to($account->email)->send(new AdminNotificationMail($account , $password));
+//        $mail = Mail::to($account->email)->send(new AdminNotificationMail($account , $password));
         return redirect(route('dashboard.admin.index'));
 //        return redirect(route('/'))->with('message' , 'Your have Add Admin Successfully');
     }
