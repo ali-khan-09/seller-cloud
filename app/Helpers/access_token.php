@@ -51,3 +51,8 @@ function token_expire(){
         return $access_token;
     }
 }
+
+function getSingleProduct($sku){
+    return $product = \App\Models\Product::where('product_id' , $sku)->get();
+}
+
