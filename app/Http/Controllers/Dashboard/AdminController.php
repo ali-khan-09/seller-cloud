@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Mail\AdminNotificationMail;
 use App\Models\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
@@ -16,11 +17,12 @@ class AdminController extends Controller
         return view('dashboard.admin.index' , compact('admin'));
     }
     public function registration_form(){
+
         return view('dashboard.auth.admin-registration');
     }
     public function register(Request $request){
         //        dd(\request()->all());
-//        $this->authorize('create' , Admin::class);
+//        dd(Auth::guard('admin')->user());
         $data = $request->validate([
             'first_name'  => ['required'],
             'last_name'   => ['required'],
@@ -65,8 +67,8 @@ class AdminController extends Controller
         $data = $request->validate([
             'first_name'  => ['required'],
             'last_name'   => ['required'],
-            'username'    => ['required'],
-            'email'       => ['required'],
+            'username'    => ['required' , 'unique:admins'],
+            'email'       => ['required' , 'unique:admins'],
             'phone'       => ['required'],
             'city'        => ['required'],
             'state'       => ['required'],

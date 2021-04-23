@@ -52,6 +52,10 @@
                     </li>
                 </ul>
             </li>
+            @php
+            // dd(Auth::guard('admin')->user())
+            @endphp
+{{--            @can('create-admin',Auth::guard('admin')->user()->super_admin === 1)--}}
             <li class="menu active">
                 <a href="#forms" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
                     <div class="">
@@ -81,6 +85,7 @@
                     </li>
                 </ul>
             </li>
+{{--            @endcan--}}
             <li class="menu active">
                 <a href="#forms" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
                     <div class="">

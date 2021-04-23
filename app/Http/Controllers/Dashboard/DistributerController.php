@@ -60,16 +60,20 @@ class DistributerController extends Controller
     public function editProcess(Request $request)
     {
 
-        $data =  Validator::make($request->all(), [
-              'name'      => ['required'],
-              'username'  => ['required'],
-              'email'     => ['required'],
-              'phone'     => ['required'],
-              'address'   => ['required'],
-              'city'      => ['required'],
-              'state'     => ['required'],
-              'postal_code' => ['required']
-       ]);
+        $data = $request->validate([
+            'name'      => ['required'],
+            'username'  => ['required' ],
+            'email'     => ['required'],
+            'phone'     => ['required'],
+            'address'   => ['required'],
+            'city'      => ['required'],
+            'state'     => ['required'],
+            'postal_code' => ['required']
+
+        ]);
+//        $data =  Validator::make($request->all(), [
+//
+//       ]);
        if($data->fails())
        {
           return reponse()->json(['errors'=>$data->errors()->all()]);
