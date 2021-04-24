@@ -26,7 +26,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'admin'], function () {
     Route::get('product' , 'ProductController@index')->name('dashboard.product.index');
     // ADMIN ROUTES
 
-    Route::get('admin-registration' , 'Dashboard\RegistrationController@registration_form')->name('admin-register.form');
+    Route::get('admin-registration' , 'Dashboard\RegistrationController@registration_form')->name('admin-register.form')->middleware('auth:admin','can:create');
     Route::post('admin-registration' , 'Dashboard\AdminController@register')->name('admin.register');
     Route::get('admin' , 'Dashboard\AdminController@index')->name('dashboard.admin.index');
     Route::get('/admin/edit' , 'Dashboard\AdminController@edit')->name('dashboard.admin.edit');
@@ -44,16 +44,11 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'admin'], function () {
 });
 Route::post('dashboard-logout','Dashboard\LoginController@dashboard_logout')->name('dashboard.logout');
 
-Route::get('dashboard/login' , 'Dashboard\LoginController@login_form');
+Route::get('dashboard/login' , 'Dashboard\LoginController@login_form')->name('dashboard.login.form');
 Route::post('dashboard/login', 'Dashboard\LoginController@admin_login')->name('dashboard.login');
 Route::get('product-result' , 'Dashboard\ProductController@storeProducts')->name('dashboard.store-product');
 
-
-Route::get('some' , function (){
-    return 'data';
-});
-
-Route::get('more' , function (){
-    return 'data';
-});
+Route::get('test' , function(){
+   return 'test';
+})->middleware('auth:admin','can:create');
 

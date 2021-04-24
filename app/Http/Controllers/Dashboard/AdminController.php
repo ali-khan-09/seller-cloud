@@ -67,8 +67,8 @@ class AdminController extends Controller
         $data = $request->validate([
             'first_name'  => ['required'],
             'last_name'   => ['required'],
-            'username'    => ['required' , 'unique:admins'],
-            'email'       => ['required' , 'unique:admins'],
+//            'username'    => ['required' , 'unique:admins'],
+//            'email'       => ['required' , 'unique:admins'],
             'phone'       => ['required'],
             'city'        => ['required'],
             'state'       => ['required'],

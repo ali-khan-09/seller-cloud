@@ -104,7 +104,7 @@
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label>Username</label>
-                                                            <input type="text" name="username" value="{{ old('username') }}" class="form-control" placeholder="Enter ditributer username" id="username">
+                                                            <input type="text" name="username" readonly value="{{ old('username') }}" class="form-control" placeholder="Enter ditributer username" id="username">
                                                             <div><p class="text-danger text-sm">
                                                                     @error('username')
                                                                     {{$message}}
@@ -116,7 +116,7 @@
                                                     <div class="row mb-4">
                                                         <div class="col-lg-6">
                                                             <label>E-mail</label>
-                                                            <input type="email" name="email" value="{{ old('email') }}" class="form-control" placeholder="Enter you E-mail" id="email">
+                                                            <input type="email" name="email" readonly value="{{ old('email') }}" class="form-control" placeholder="Enter you E-mail" id="email">
                                                             <div><p class="text-danger text-sm">
                                                                     @error('email')
                                                                     {{$message}}

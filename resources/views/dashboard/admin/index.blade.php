@@ -121,7 +121,7 @@
                                             <div class="row mb-4">
                                                 <div class="col-6">
                                                     <label>Username</label>
-                                                    <input type="text" name="username" value="{{ old('username') }}" id="username"
+                                                    <input type="text" name="username" value="{{ old('username') }}" readonly id="username"
                                                            class="form-control" placeholder="Enter Your Username">
                                                     <div><p class="text-danger text-sm">
                                                             @error('username')
@@ -146,7 +146,7 @@
                                             <div class="form-row mb-4">
                                                 <div class="col-lg-5">
                                                     <label>E-mail</label>
-                                                    <input type="email" name="email" value="{{ old('email') }}"  id="email"
+                                                    <input type="email" name="email" value="{{ old('email') }}" readonly  id="email"
                                                            class="form-control" placeholder="Enter you E-mail">
                                                     <div><p class="text-danger text-sm">
                                                             @error('email')
