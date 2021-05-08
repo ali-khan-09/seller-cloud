@@ -34,6 +34,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @if(Auth::guard('admin')->user()->super_admin == 1)
                                     @foreach($admin as $item)
                                     <tr id="row{{$item->id}}">
                                         <td>{{$item->first_name}}</td>
@@ -52,7 +53,7 @@
                                         </td>
                                     </tr>
                                     @endforeach
-
+                                    @endif
                                     </tbody>
                                     <tfoot>
                                     <tr>

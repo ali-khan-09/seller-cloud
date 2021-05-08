@@ -10,8 +10,9 @@
                 <div class="card-body">
                     {{ __('Please confirm your password before continuing.') }}
 
-                    <form method="POST" action="{{ route('password.confirm') }}">
-                        @csrf
+{{--                    <form method="POST" action="{{ route('password.confirm') }}">--}}
+                    <form method="POST" action="{{ route('admins.reset.update') }}">
+                    @csrf
 
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>

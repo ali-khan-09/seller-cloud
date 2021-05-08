@@ -63,7 +63,9 @@
                                 </div>
 
                                 <div class="division">
-
+                                    <a class="btn btn-link" href="{{ route('admins.showResetEmailForm' , ['user_type' => 'admins'])}}">
+                                        {{ __('Forgot Your Password?') }}
+                                    </a>
                                 </div>
                             </div>
                         </form>

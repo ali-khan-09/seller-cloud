@@ -114,4 +114,5 @@ class AdminController extends Controller
         $admin->delete();
         return response()->json(['success' => 'Record has been successfully Deleted']);
     }
+
 }

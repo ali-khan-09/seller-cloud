@@ -62,7 +62,7 @@ class DistributerController extends Controller
 
         $data = $request->validate([
             'name'      => ['required'],
-            'username'  => ['required' ],
+            'username'  => ['required'],
             'email'     => ['required'],
             'phone'     => ['required'],
             'address'   => ['required'],
