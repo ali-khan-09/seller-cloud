@@ -28,7 +28,7 @@
                                         <th>Phone</th>
                                         <th>state</th>
                                         <th>city</th>
-                                        <th>Status</th>
+                                        <!-- <th>Status</th> -->
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -41,7 +41,7 @@
                                         <td>{{$item->phone}}</td>
                                         <td>{{$item->state}}</td>
                                         <td>{{$item->city}}</td>
-                                        <td>{{$item->status}}</td>
+                                        <!-- <td>{{$item->status}}</td> -->
                                         <td class="text-center">
                                             <button type="button" class="btn btn-primary mb-2 mr-2" data-toggle="modal" data-target="#edit_modal"
                                             onclick="editDistricbuter({{$item->id}})">Edit</button>
@@ -60,7 +60,7 @@
                                         <th>Phone</th>
                                         <th>state</th>
                                         <th>city</th>
-                                        <th>Status</th>
+                                        <!-- <th>Status</th> -->
                                         <th class="invisible"></th>
                                     </tr>
                                     </tfoot>

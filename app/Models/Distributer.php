@@ -22,4 +22,8 @@ class Distributer extends Authenticatable
     protected $hidden = [
         'password',
     ];
+    // public function orders()
+    // {
+    //     return $this->belongsTo(Order::class);
+    // }
 }

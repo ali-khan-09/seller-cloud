@@ -17,15 +17,18 @@
 <script src="{{asset('dashboard_assets/plugins/table/datatable/datatables.js')}}"></script>
 <!-- TABLES JS FILES -->
 <script src="{{asset('dashboard_assets/plugins/table/datatable/datatables.js')}}"></script>
+<!-- Toastr -->
+<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+
 <!-- WEDIGTS SCRIPTS -->
 <script src="{{asset('dashboard_assets/plugins/apex/apexcharts.min.js')}}"></script>
 <script src="{{asset('dashboard_assets/assets/js/widgets/modules-widgets.js')}}"></script>
 <script>
     $(document).ready(function() {
         App.init();
-        $(".tagging").select2({
-            tags: true
-        });
+        // $(".tagging").select2({
+        //     tags: true
+        // });
         //File upload
         var firstUpload = new FileUploadWithPreview('myFirstImage')
         //sweet Alert
@@ -120,7 +123,7 @@
                 tr += '<td>'+data.success.phone+'</td>';
                 tr += '<td>'+data.success.state+'</td>';
                 tr += '<td>'+data.success.city+'</td>';
-                tr += '<td>'+data.success.status+'</td>';
+                // tr += '<td>'+data.success.status+'</td>';
                 tr += '<td><button type="button" class="btn btn-primary mb-2 mr-2" data-toggle="modal" data-target="#edit_modal" onclick="editDistricbuter('+data.success.id+')">Edit</button> <button type="button" class="btn btn-danger mb-2 mr-2"  onclick="deleteDistributer('+data.success.id+')">Del</button> </td>';
                 $('#row'+data.success.id).html(tr);
                 $('#edit_modal').modal('toggle');
@@ -238,6 +241,97 @@
             });
         }
     }
+
+    function showOrder(id) {
+        $.ajax({
+            url:'order-show',
+            type:'get',
+            data: {order:id,_token: '{{csrf_token()}}' },
+            beforeSend:function(argument) {
+                $('.modal-body').addClass('block-screen');
+            },
+            success:function(data){
+                console.log(data);
+                console.log(data.length);
+                var name = data[0].first_name +" "+ data[0].last_name;
+                if(data[0].order_status == 1){
+                   var order_status = '<span class="badge badge-primary">Processing</span>';
+                }else{
+                   var order_status = '<span class="badge badge-success">Processed</span>'
+                }
+                var tr = '';
+                var total = 0;
+                for(var i = 0; i < data.length; i++)
+                   {
+                       var sub_total = data[i].price * data[i].qty;
+                       total=total+sub_total;
+                       tr+="<tr>";
+                       tr+="<td title = 'Product Id'>"+data[i].product_id+"</td>" ;
+                       tr+="<td title = '"+data[i].product_name+"'>"+data[i].product_name+"</td>" ;
+                       tr+="<td title = 'Product Quantity'>"+data[i].qty+"</td>" ;
+                       tr+="<td title = 'Product Price'>"+data[i].price+"</td>" ;
+                       tr+="<td title = 'Sub Total'>"+sub_total+"</td>" ;
+                       tr+="</tr>" ;
+                   }
+                tr+="<tr><td></td><td></td><td></td><td><b>Total</b></td><td title='Order Total'>"+total+"</td></tr>";
+                $("#products").html(tr);
+                $("#name").html(name);
+                $("#email").html(data[0].email);
+                $("#address").html(data[0].address);
+                $("#order_id").html(data[0].o_id);
+                $("#phone").html(data[0].phone);
+                $("#date").html(data[0].created_at);
+                $("#city").html(data[0].city);
+                $("#state").html(data[0].state);
+                $("#zip").html(data[0].zip);
+                $("#company").html(data[0].company);
+                $("#comments").html(data[0].comments);
+                $('#order_status').html(order_status);
+                
+
+            },
+            error:function(response){
+                alert('Error Occured');
+            },
+            complete:function(){
+                $('.modal-body').removeClass('block-screen');
+            }
+        });
+    }
+    function changeOrderStatus(id,status) {
+       if(status == 0){ 
+            $('#o_id').val(id);
+       }else{
+            toastr.error("Order is complete, You cannot change the status.");
+       } 
+    }
+       $('#order_form').submit(function(e){
+         e.preventDefault();
+         var tr = '';
+         $.ajax({
+                url:'order-status',
+                type:'post',
+                data: $(this).serialize(),
+                success:function(data){
+                    console.log(data);
+                    if(data[1].order_status == 1)
+                    {
+                        var status = 'Processed';
+                    }else{
+                        var status = 'Processing';
+                    }
+                    // $('#message').html('<div class="alert alert-success">Order status has been changed to '+status+'</div>');
+                    toastr.success('Order status has been changed to '+status);
+                    setInterval(function (argument) {
+                        window.location.reload()
+                    },1000);
+
+                },
+                error:function(response){
+                    alert('Error Occured');
+                }
+            });
+      });
+ 
 </script>
 
-<!-- Table js end-->

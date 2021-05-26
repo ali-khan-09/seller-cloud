@@ -34,12 +34,16 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'admin'], function () {
     Route::post('admin-delete' , 'Dashboard\AdminController@destroy')->name('dashboard.admin.delete')->middleware('auth:admin', 'can:create');
 
     // DISTRIBUTOR ROUTE
-    Route::get('distributers' , 'Dashboard\DistributerController@index')->name('dashboard.distributer.index');
+    Route::get('c' , 'Dashboard\DistributerController@index')->name('dashboard.distributer.index');
     Route::get('distributer-registration' , 'Dashboard\DistributerController@distributer_form')->name('dashboard.distributor.create');
     Route::post('distributer-registration' , 'Dashboard\DistributerController@register')->name('distributer.register');
     Route::get('distributer-edit' , 'Dashboard\DistributerController@edit')->name('distributer.edit');
     Route::post('distributer-update' , 'Dashboard\DistributerController@editProcess')->name('distributer.update');
     Route::post('distributer-delete' , 'Dashboard\DistributerController@delete')->name('distributer.delete');
+    // Orders Route
+    Route::get('orders' , 'Dashboard\OrdersController@index')->name('dashboard.orders.index');
+    Route::get('order-show' , 'Dashboard\OrdersController@show')->name('order.show');
+    Route::post('order-status' , 'Dashboard\OrdersController@status')->name('order.status');
     // Logout Route
     Route::post('dashboard-logout','Dashboard\LoginController@dashboard_logout')->name('dashboard.logout');
     // UPLOAD EXCEL DATA ROUTE
@@ -49,7 +53,14 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'admin'], function () {
 
 Route::get('dashboard/login' , 'Dashboard\LoginController@login_form')->name('dashboard.login.form');
 Route::post('dashboard/login', 'Dashboard\LoginController@admin_login')->name('dashboard.login');
-Route::get('product-result' , 'Dashboard\ProductController@storeProducts')->name('dashboard.store-product');
+Route::post('product-result' , 'Dashboard\ProductController@storeProducts')->name('dashboard.store-product');
+
+Route::get('product' , 'Dashboard\ProductController@items');
+Route::group(['prefix' => 'admins'] , function(){
+Route::get('reset/{token}' , 'Auth\ResetPasswordController@showResetForm')->name('admins.showResetForm');
+Route::get('resetemail/{user_type}' , 'Auth\ForgotPasswordController@showLinkRequestForm')->name('admins.showResetEmailForm');
+Route::post('reset' , 'Auth\ResetPasswordController@reset')->name('admins.reset.update');
+});
 
 Route::get('product' , 'Dashboard\ProductController@items');
 Route::group(['prefix' => 'admins'] , function(){
