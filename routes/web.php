@@ -42,6 +42,9 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'admin'], function () {
     Route::post('distributer-delete' , 'Dashboard\DistributerController@delete')->name('distributer.delete');
     // Logout Route
     Route::post('dashboard-logout','Dashboard\LoginController@dashboard_logout')->name('dashboard.logout');
+    // UPLOAD EXCEL DATA ROUTE
+    Route::get('excel-upload','Dashboard\ExcelDataController@index')->name('dashboard.logout');
+
 });
 
 Route::get('dashboard/login' , 'Dashboard\LoginController@login_form')->name('dashboard.login.form');
@@ -55,7 +58,11 @@ Route::get('resetemail/{user_type}' , 'Auth\ForgotPasswordController@showLinkReq
 Route::post('reset' , 'Auth\ResetPasswordController@reset')->name('admins.reset.update');
 });
 
+Route::get('/test' , function (){
+   $i =1;
+    echo 'img'.$i;
 
+});
 
-Route::get('/test-excel' , 'Dashboard\ExcelDataController@test');
-Route::post('/test-excel' , 'Dashboard\ExcelDataController@excel')->name('test');
+//Route::get('/test-excel' , 'Dashboard\ExcelDataController@test');
+Route::post('/test-excel' , 'Dashboard\ExcelDataController@excel')->name('upload.file');

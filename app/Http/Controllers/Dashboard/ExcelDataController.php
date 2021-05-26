@@ -8,9 +8,8 @@ use Illuminate\Http\Request;
 
 class ExcelDataController extends Controller
 {
-    public function test(){
-
-        return view('test-password');
+    public function index(){
+        return view('dashboard.excel.index');
     }
     public function excel(Request $request){
         $path = $request->file('file')->getRealPath();

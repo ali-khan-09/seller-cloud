@@ -10,7 +10,9 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
+        'sku',
         'product_name',
+        'product_image',
         'product_short_desc',
         'product_long_desc',
         'product_weight',
@@ -26,8 +28,16 @@ class Product extends Model
         'product_map_price',
         'category_id',
         'subcategory_id',
-        'image_id',
+        'product_msrp_price',
     ];
 
-
+    public function category(){
+        return $this->belongsTo(Category::class);
+    }
+    public function subcategory(){
+        return $this->belongsTo(Subcategory::class);
+    }
+    public function images(){
+        return $this->hasMany(Image::class);
+    }
 }

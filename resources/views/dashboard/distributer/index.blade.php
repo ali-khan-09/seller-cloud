@@ -228,5 +228,5 @@
             </div>
         </div>
         <!--  END Table AREA  -->
-
+    </div>
 @endsection

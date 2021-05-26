@@ -17,7 +17,9 @@
 <script src="{{asset('dashboard_assets/plugins/table/datatable/datatables.js')}}"></script>
 <!-- TABLES JS FILES -->
 <script src="{{asset('dashboard_assets/plugins/table/datatable/datatables.js')}}"></script>
-
+<!-- WEDIGTS SCRIPTS -->
+<script src="{{asset('dashboard_assets/plugins/apex/apexcharts.min.js')}}"></script>
+<script src="{{asset('dashboard_assets/assets/js/widgets/modules-widgets.js')}}"></script>
 <script>
     $(document).ready(function() {
         App.init();
