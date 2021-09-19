@@ -34,6 +34,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @if(Auth::guard('admin')->user()->super_admin == 1)
                                     @foreach($admin as $item)
                                     <tr id="row{{$item->id}}">
                                         <td>{{$item->first_name}}</td>
@@ -52,7 +53,7 @@
                                         </td>
                                     </tr>
                                     @endforeach
-
+                                    @endif
                                     </tbody>
                                     <tfoot>
                                     <tr>
@@ -121,7 +122,7 @@
                                             <div class="row mb-4">
                                                 <div class="col-6">
                                                     <label>Username</label>
-                                                    <input type="text" name="username" value="{{ old('username') }}" id="username"
+                                                    <input type="text" name="username" value="{{ old('username') }}" readonly id="username"
                                                            class="form-control" placeholder="Enter Your Username">
                                                     <div><p class="text-danger text-sm">
                                                             @error('username')
@@ -146,7 +147,7 @@
                                             <div class="form-row mb-4">
                                                 <div class="col-lg-5">
                                                     <label>E-mail</label>
-                                                    <input type="email" name="email" value="{{ old('email') }}"  id="email"
+                                                    <input type="email" name="email" value="{{ old('email') }}" readonly  id="email"
                                                            class="form-control" placeholder="Enter you E-mail">
                                                     <div><p class="text-danger text-sm">
                                                             @error('email')
@@ -202,10 +203,10 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-row mb-4 mt-2" id="pass_fields" style="display: none;">
+                                            <div class="form-row mb-4 mt-2">
                                                 <div class="col-6">
                                                     <label>Password</label>
-                                                    <input  type="password" name="password" id="password"
+                                                    <input id="p-text" type="password" name="password" id="password"
                                                            placeholder="Password" class="form-control" >
                                                     <div><p class="text-danger text-sm">
                                                             @error('password')
@@ -214,10 +215,10 @@
                                                         </p>
                                                     </div>
                                                 </div>
-                                                <div class="col-6" >
+                                                <div class="col-6">
                                                     <label>Confirm Password</label>
-                                                    <input type="password" class="form-control" name="password_confirmation"
-                                                           placeholder="Password" class="form-control" id="password2">
+                                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation"
+                                                           placeholder="Password" class="form-control" >
                                                     <div><p class="text-danger text-sm">
                                                             @error('password_confirmation')
                                                             {{$message}}
@@ -225,12 +226,6 @@
                                                         </p>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="n-chk mb-2">
-                                                <label class="new-control new-checkbox new-checkbox-text checkbox-success float-right">
-                                                  <input type="checkbox" class="new-control-input" id="hide_show_pass" onchange="hideShowpass()">
-                                                  <span class="new-control-indicator" ></span><span class="new-chk-content"> Change Password</span>
-                                                </label>
                                             </div>
                                             <input type="submit" class="btn btn-primary">
                                         </form>

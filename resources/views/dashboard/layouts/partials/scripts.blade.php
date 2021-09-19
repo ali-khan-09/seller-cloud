@@ -17,7 +17,9 @@
 <script src="{{asset('dashboard_assets/plugins/table/datatable/datatables.js')}}"></script>
 <!-- TABLES JS FILES -->
 <script src="{{asset('dashboard_assets/plugins/table/datatable/datatables.js')}}"></script>
-
+<!-- WEDIGTS SCRIPTS -->
+<script src="{{asset('dashboard_assets/plugins/apex/apexcharts.min.js')}}"></script>
+<script src="{{asset('dashboard_assets/assets/js/widgets/modules-widgets.js')}}"></script>
 <script>
     $(document).ready(function() {
         App.init();
@@ -85,10 +87,6 @@
             url:'distributer-edit',
             type:'get',
             data: {distributer:id,_token: '{{csrf_token()}}' },
-            beforeSend:function(){
-                $("#distributer_form").hide();  
-                $('#error').html('');
-            },
             success:function(data){
                 console.log(data);
                 $("#name").val(data.name);
@@ -101,11 +99,9 @@
                 $("#state").val(data.state);
                 $("#d_id").val(data.id);
                 $("#postal_code").val(data.postal_code);
-                $("#distributer_form").show(); 
             },
             error:function(response){
                 alert('Error Occured');
-                $("#distributer_form").hide(); 
             }
         });
     }
@@ -125,13 +121,12 @@
                 tr += '<td>'+data.success.state+'</td>';
                 tr += '<td>'+data.success.city+'</td>';
                 tr += '<td>'+data.success.status+'</td>';
-                tr += '<td><button type="button" class="btn btn-primary mb-2 mr-2" data-toggle="modal" data-target="#edit_modal" onclick="editDistricbuter('+data.success.id+')">Edit</button><button type="button" class="btn btn-danger mb-2 mr-2"  onclick="deleteDistributer('+data.success.id+')">Del</button></td>';
+                tr += '<td><button type="button" class="btn btn-primary mb-2 mr-2" data-toggle="modal" data-target="#edit_modal" onclick="editDistricbuter('+data.success.id+')">Edit</button> <button type="button" class="btn btn-danger mb-2 mr-2"  onclick="deleteDistributer('+data.success.id+')">Del</button> </td>';
                 $('#row'+data.success.id).html(tr);
                 $('#edit_modal').modal('toggle');
 
             },
             error:function(response){
-                console.log(response);
                 var error = response.responseJSON.errors;
                 var response2 = JSON.parse(response.responseText);
                 var errorString = '<ul>';
@@ -168,12 +163,8 @@
             url:'admin/edit',
             type:'get',
             data: {id:id,_token: '{{csrf_token()}}' },
-            beforeSend:function(){
-                $("#admin_form").hide(); 
-            },
             success:function(data){
                 console.log(data);
-                $('#error').html('');
                 $("#first_name").val(data.first_name);
                 $("#last_name").val(data.last_name);
                 $("#username").val(data.username);
@@ -185,13 +176,9 @@
                 $("#state").val(data.state);
                 $("#admin_id").val(data.id);
                 $("#postal_code").val(data.postal_code);
-                $('#password').val('');
-                $('#password2').val('');
-                $("#admin_form").show(); 
             },
             error:function(response){
                 alert('Error Occured');
-                $("#admin_form").hide(); 
             }
         })
     }
@@ -214,10 +201,9 @@
                 tr += '<td>'+data.success.status+'</td>';
                 tr += '<td class="d-flex text-center">' +
                     '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit_modal" ' +
-                    'onclick="adminEdit('+data.success.id+')">Edit</button> ' +
-                    '<button type="button" class="btn btn-danger btn-sm"  onclick="delete_admin('+data.success.id+')">Del</button> </td>';
+                    'onclick="editDistricbuter('+data.success.id+')">Edit</button> ' +
+                    '<button type="button" class="btn btn-danger btn-sm"  onclick="deleteDistributer('+data.success.id+')">Del</button> </td>';
                 $('#row'+data.success.id).html(tr);
-
                 $('#edit_modal').modal('toggle');
 
             },
@@ -229,13 +215,12 @@
                     errorString += '<li>' + value + '</li>';
                 });
                 errorString += '</ul>'
-
                 $('#error').html(errorString);
             }
         });
     })
     function delete_admin(id) {
-        var conf =  confirm("Do you really want to delete this admin?");
+        var conf =  confirm("Do you really want to delete this distributer?");
         if(conf == true)
         {
             $.ajax({
@@ -253,17 +238,6 @@
             });
         }
     }
-   
-   function hideShowpass()
-   { 
-      if($('#hide_show_pass').is(":checked"))
-      {
-          $('#pass_fields').show();
-      }else
-      {
-         $('#pass_fields').hide();
-      }
-   }
 </script>
 
 <!-- Table js end-->

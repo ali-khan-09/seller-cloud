@@ -52,6 +52,7 @@
                     </li>
                 </ul>
             </li>
+            @if(Auth::guard('admin')->user()->super_admin == 1)
             <li class="menu active">
                 <a href="#forms" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
                     <div class="">
@@ -81,6 +82,7 @@
                     </li>
                 </ul>
             </li>
+                @endif
             <li class="menu active">
                 <a href="#forms" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
                     <div class="">

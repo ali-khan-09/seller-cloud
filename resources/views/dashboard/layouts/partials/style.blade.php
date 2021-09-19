@@ -19,3 +19,7 @@
 <link rel="stylesheet" type="text/css" href="{{asset('dashboard_assets/plugins/table/datatable/dt-global_style.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('dashboard_assets/plugins/table/datatable/custom_dt_custom.css')}}">
 <link rel="icon" type="image/x-icon" href="{{asset('dashboard_assets/assets/img/favicon.ico')}}" />
+<!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+<link href="{{asset('dashboard_assets/plugins/apex/apexcharts.css')}}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{{asset('dashboard_assets/assets/css/widgets/modules-widgets.css')}}">
+<!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->

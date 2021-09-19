@@ -15,6 +15,17 @@ class CreateDistributersTable extends Migration
     {
         Schema::create('distributers', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('username')->unique();
+            $table->string('email')->unique();
+            $table->string('phone');
+            $table->string('address');
+            $table->string('city');
+            $table->string('state');
+            $table->string('postal_code');
+            $table->string('password');
+            $table->string('email_token')->nullable();
+            $table->string('password_token')->nullable();
             $table->timestamps();
         });
     }

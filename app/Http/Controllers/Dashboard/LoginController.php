@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     use AuthenticatesUsers;
+    public function __construct()
+    {
+        $this->middleware('guest')->except('logout');
+    }
+
     public function login_form(){
         return view('auth.admin-login');
     }
@@ -25,6 +30,7 @@ class LoginController extends Controller
 //            return Auth::guard('admin')->user();
 //            generate_access_token();
 //            return session()->get('access_token');
+//            dd(Auth::guard('admin')->user());
             return redirect('/dashboard');
         }
         else{
@@ -37,5 +43,9 @@ class LoginController extends Controller
     public function guard()
     {
         return Auth::guard('admin');
+    }
+    public function dashboard_logout(){
+        Auth::guard('admin')->logout();
+        return redirect('/dashboard/login');
     }
 }

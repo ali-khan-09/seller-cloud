@@ -25,14 +25,14 @@ class DistributerController extends Controller
     {
        $data = $request -> validate([
               'name'     	=> ['required'],
-              'username' 	=> ['required'],
-              'email'    	=> ['required'],
+              'username' 	=> ['required' , 'unique:distributers'],
+              'email'    	=> ['required' , 'unique:distributers'],
               'phone'    	=> ['required'],
               'address'  	=> ['required'],
               'city'     	=> ['required'],
               'state'    	=> ['required'],
               'postal_code' => ['required'],
-              'password'    => ['required','string','confirmed'] 
+              'password'    => ['required','string','confirmed']
        ]);
 
        $account = Distributer::create([
@@ -46,7 +46,7 @@ class DistributerController extends Controller
             'address'    => $data['address'],
             'password'   => Hash::make($data['password']),
         ]);
-       return 'Distributer registered';
+       return redirect(route('dashboard.distributer.index'));
     }
 
     public function edit(Request $request)
@@ -59,18 +59,26 @@ class DistributerController extends Controller
 
     public function editProcess(Request $request)
     {
-      
-         $data = $request -> validate([
-              'name'      => ['required'],
-              'username'  => ['required'],
-              'email'     => ['required'],
-              'phone'     => ['required'],
-              'address'   => ['required'],
-              'city'      => ['required'],
-              'state'     => ['required'],
-              'postal_code' => ['required']
-          ]);
-       
+
+        $data = $request->validate([
+            'name'      => ['required'],
+            'username'  => ['required'],
+            'email'     => ['required'],
+            'phone'     => ['required'],
+            'address'   => ['required'],
+            'city'      => ['required'],
+            'state'     => ['required'],
+            'postal_code' => ['required']
+
+        ]);
+//        $data =  Validator::make($request->all(), [
+//
+//       ]);
+       if($data->fails())
+       {
+          return reponse()->json(['errors'=>$data->errors()->all()]);
+       }else
+       {
           $id = $request->d_id;
           $distributer = Distributer::find($id);
           $distributer->update([
@@ -83,7 +91,8 @@ class DistributerController extends Controller
             'postal_code'=> $request['postal_code'],
             'address'    => $request['address'],
           ]);
-        return response()->json(['success' => $distributer]);
+          return response()->json(['success' => $distributer]);
+       }
     }
 
     public function delete(Request $request)
@@ -94,4 +103,3 @@ class DistributerController extends Controller
         return response()->json(['success'=>'Distributer deleted successfully!']);
     }
 }
- 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Mail\AdminNotificationMail;
 use App\Models\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
@@ -16,15 +17,17 @@ class AdminController extends Controller
         return view('dashboard.admin.index' , compact('admin'));
     }
     public function registration_form(){
+
         return view('dashboard.auth.admin-registration');
     }
     public function register(Request $request){
-//        dd(\request()->all());
+        //        dd(\request()->all());
+//        dd(Auth::guard('admin')->user());
         $data = $request->validate([
             'first_name'  => ['required'],
             'last_name'   => ['required'],
-            'username'    => ['required'],
-            'email'       => ['required'],
+            'username'    => ['required', 'unique:admins'],
+            'email'       => ['required', 'unique:admins'],
             'phone'       => ['required'],
             'city'        => ['required'],
             'state'       => ['required'],
@@ -49,7 +52,7 @@ class AdminController extends Controller
         ]);
 
         // Sending Mail to Account Created
-        $mail = Mail::to($account->email)->send(new AdminNotificationMail($account , $password));
+//        $mail = Mail::to($account->email)->send(new AdminNotificationMail($account , $password));
         return redirect(route('dashboard.admin.index'));
 //        return redirect(route('/'))->with('message' , 'Your have Add Admin Successfully');
     }
@@ -64,8 +67,8 @@ class AdminController extends Controller
         $data = $request->validate([
             'first_name'  => ['required'],
             'last_name'   => ['required'],
-            'username'    => ['required'],
-            'email'       => ['required'],
+//            'username'    => ['required' , 'unique:admins'],
+//            'email'       => ['required' , 'unique:admins'],
             'phone'       => ['required'],
             'city'        => ['required'],
             'state'       => ['required'],
@@ -111,4 +114,5 @@ class AdminController extends Controller
         $admin->delete();
         return response()->json(['success' => 'Record has been successfully Deleted']);
     }
+
 }
